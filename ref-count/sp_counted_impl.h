@@ -12,6 +12,7 @@ typedef struct sp_counted_impl_p_s {
 static inline sp_counted_base *sp_counted_impl_p_new(void *px)
 {
 	sp_counted_impl_p *p = (sp_counted_impl_p *)calloc(1, sizeof(sp_counted_impl_p));
+	sp_counted_init((sp_counted_base *)p);
 	p->px_ = px;
 }
 

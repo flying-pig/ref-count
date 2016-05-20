@@ -59,6 +59,7 @@ typedef enum SP_COUNT_TYPE {
 
 void defult_free();
 sp_counted_base *sp_counted_new(SP_COUNT_TYPE type);
+void sp_counted_init(sp_counted_base *base);
 void destroy(sp_counted_base *base);
 void add_ref_copy(sp_counted_base *base);
 int add_ref_lock(sp_counted_base *base);

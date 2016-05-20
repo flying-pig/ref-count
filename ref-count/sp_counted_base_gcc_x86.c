@@ -85,6 +85,21 @@ sp_counted_base *sp_counted_new(SP_COUNT_TYPE type)
 	return base;
 }
 
+void sp_counted_init(sp_counted_base *base)
+{
+	base->use_count_ = 1;
+	base->weak_count_ = 1;
+
+	base->free_ = defult_free;
+	base->destroy = destroy;
+	base->add_ref_copy = add_ref_copy;
+	base->add_ref_lock = add_ref_lock;
+	base->release = release;
+	base->weak_add_ref = weak_add_ref;
+	base->weak_release = weak_release;
+	base->use_count = use_count;
+}
+
 void destroy(sp_counted_base *base)
 {
 	base->free_();
