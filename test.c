@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include "ref-count/sp_counted_base.h"
+#include "ref-count/sp_counted_impl.h"
 
 #define NUM_THREADS 10
 
@@ -17,6 +18,14 @@ void *test_process(void *arg)
 	for (i = 0; i < 1000; i++) {
 		b->add_ref_copy(b);
 	}
+}
+
+void test_sp_counted_impl_p()
+{
+	char *buf = (char *)calloc(1, 1024);
+	sp_counted_base *p = sp_counted_impl_p_new(buf);
+	free(buf);
+	free(p);
 }
 
 int main(int argc, char *argv[])
@@ -46,6 +55,8 @@ int main(int argc, char *argv[])
 	}
 
 	printf("use count: %ld\n", b->use_count(b));
+
+	test_sp_counted_impl_p();
 
 	return 0;
 }
