@@ -1,4 +1,5 @@
-CFLAGS = -I. -Iref-count
+CC = gcc
+CFLAGS = -Wall -O -I. -Iref-count
 LDFLAGS = -pthread
 OBJS = test.o sp_counted_base_gcc_x86.o
 all: test

@@ -18,6 +18,7 @@ void *test_process(void *arg)
 	for (i = 0; i < 1000; i++) {
 		b->add_ref_copy(b);
 	}
+	return NULL;
 }
 
 void test_sp_counted_impl_p()
@@ -50,7 +51,7 @@ int main(int argc, char *argv[])
 			printf("pthread_jon: %d\n", s);
 		}
 
-		printf("Joined with thread %d; returned value was -",
+		printf("Joined with thread %ld; returned value was -",
 				tinfo[tnum].thread_id);
 	}
 
