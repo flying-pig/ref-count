@@ -10,4 +10,10 @@ typedef struct shared_count_s {
 
 shared_count *shared_count_new();
 
+typedef struct weak_count_s {
+	sp_counted_base *pi_;
+} weak_count;
+
+weak_count *weak_count_new();
+
 #endif /* ifndef __REF_COUNT_SHARED_COUNT_H_ */
