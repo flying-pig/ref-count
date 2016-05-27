@@ -1,10 +1,14 @@
 CC = gcc
-CFLAGS = -Wall -O -I. -Iref-count
+CFLAGS = -g -Wall -O -I. -Iref-count
 LDFLAGS = -pthread
 OBJS = test.o sp_counted_base_gcc_x86.o
-all: test
+SHARED_OBJS = test_shared_ref.o shared_count.o sp_counted_base_gcc_x86.o
+all: test test_shared_ref
 
 test: $(OBJS)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+test_shared_ref: $(SHARED_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
@@ -14,6 +18,6 @@ test: $(OBJS)
 	$(CC) -c $^ $(CFLAGS)
 
 clean:
-	rm -f $(OBJS) test
+	rm -f *.o test test_shared_ref
 
 .PHONY: clean
