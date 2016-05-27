@@ -21,6 +21,17 @@ shared_count *shared_count_copy_init(shared_count *l, shared_count *r)
 	return l;
 }
 
+shared_count *shared_count_init_from_weak(shared_count *l, weak_count *r)
+{
+	l->pi_ = r->pi_;
+	if (l->pi_ && !l->pi_->add_ref_lock(l->pi_)) {
+		l->pi_ = 0;
+	}
+
+	return l;
+}
+		
+
 /* shared_count & operator=(shared_count &r) */
 shared_count *shared_count_copy(shared_count *l, shared_count *r)
 {
@@ -40,16 +51,6 @@ void shared_count_swap(shared_count *l, shared_count *r)
 	sp_counted_base *tmp = r->pi_;
 	r->pi_ = l->pi_;
 	l->pi_ = tmp;
-}
-
-shared_count *shared_count_copy_from_weak(shared_count *l, weak_count *r)
-{
-	l->pi_ = r->pi_;
-	if (l->pi_ && !l->pi_->add_ref_lock(l->pi_)) {
-		l->pi_ = 0;
-	}
-
-	return l;
 }
 
 void shared_count_release(shared_count *l)
@@ -73,6 +74,15 @@ weak_count *weak_count_copy_init(weak_count *l, weak_count *r)
 	return l;
 }
 
+weak_count *weak_count_init_from_shared(weak_count *l, shared_count *r)
+{
+	l->pi_ = r->pi_;
+	if (l->pi_ != NULL) {
+		l->pi_->weak_add_ref(l->pi_);
+	}
+	return l;
+}
+
 /* weak_count & operator=(weak_count &r) */
 weak_count *weak_count_copy(weak_count *l, weak_count *r)
 {
@@ -83,6 +93,18 @@ weak_count *weak_count_copy(weak_count *l, weak_count *r)
 		l->pi_ = tmp;
 	}
 
+	return l;
+}
+
+/* weak_count & operator= (shared_count const & r) */
+weak_count *weak_count_copy_from_shared(weak_count *l, shared_count *r)
+{
+	sp_counted_base *tmp = r->pi_;
+	if (tmp != l->pi_) {
+		if (tmp != NULL) tmp->weak_add_ref(r->pi_);
+		if (l->pi_ != NULL) l->pi_->weak_release(l->pi_);
+		l->pi_ = tmp;
+	}
 	return l;
 }
 
