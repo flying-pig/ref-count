@@ -14,6 +14,8 @@ typedef struct shared_ref_s {
 #define SHARED_REF_DEF(name) \
 	shared_ref name = SHARED_REF_INIT()
 
+#define shared_ref_retain(l, p) shared_ref_init(l, p)
+
 static inline shared_ref *shared_ref_new()
 {
 	return (shared_ref *)calloc(1, sizeof(shared_ref));
@@ -55,6 +57,20 @@ static inline void shared_ref_reset(shared_ref *l, void *p)
 		shared_ref_swap(&tmp, l);
 		shared_ref_release(&tmp);
 	}
+}
+
+static inline shared_ref *shared_ref_copy_init(shared_ref *l, shared_ref *r)
+{
+	l->px_ = r->px_;
+	shared_count_copy_init(&l->pn_, &r->pn_);
+	return l;
+}
+
+static inline shared_ref *shared_ref_copy(shared_ref *l, shared_ref *r)
+{
+	l->px_ = r->px_;
+	shared_count_copy(&l->pn_, &r->pn_);
+	return l;
 }
 
 #endif /* ifndef __REF_COUNT_SHARED_REF_H_ */
