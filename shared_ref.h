@@ -1,14 +1,10 @@
 #ifndef __REF_COUNT_SHARED_REF_H_
 #define __REF_COUNT_SHARED_REF_H_ 
 
-#include <shared_count.h>
+#include <ref_count.h>
 
 #define swap(x, y) do{ typeof((x)) tmp = (y); (y) = (x); (x) = tmp; }while(0);
 
-typedef struct shared_ref_s {
-	void *px_;
-	shared_count pn_;
-} shared_ref;
 
 #define SHARED_REF_INIT() { NULL, {NULL}}
 #define SHARED_REF_DEF(name) \
@@ -70,6 +66,15 @@ static inline shared_ref *shared_ref_copy(shared_ref *l, shared_ref *r)
 {
 	l->px_ = r->px_;
 	shared_count_copy(&l->pn_, &r->pn_);
+	return l;
+}
+
+static inline shared_ref *shared_ref_init_from_weak(shared_ref *l, weak_ref *r)
+{
+	l->px_ = NULL;
+	shared_count *s = shared_count_init_from_weak(&l->pn_, &r->pn_);
+	if (s != NULL) l->px_ = r->px_;
+
 	return l;
 }
 
