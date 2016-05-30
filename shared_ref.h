@@ -73,7 +73,7 @@ static inline shared_ref *shared_ref_init_from_weak(shared_ref *l, weak_ref *r)
 {
 	l->px_ = NULL;
 	shared_count *s = shared_count_init_from_weak(&l->pn_, &r->pn_);
-	if (s != NULL) l->px_ = r->px_;
+	if (s->pi_ != NULL) l->px_ = r->px_;
 
 	return l;
 }
