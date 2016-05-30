@@ -30,4 +30,17 @@ static inline void weak_ref_release(weak_ref *l)
 	weak_count_release(&l->pn_);
 }
 
+static inline weak_ref *weak_ref_copy_init(weak_ref *l, weak_ref *r)
+{
+	l->px_ = r->px_;
+	weak_count_copy_init(&l->pn_, &r->pn_);
+	return l;
+}
+
+static inline weak_ref *weak_ref_copy(weak_ref *l, weak_ref *r)
+{
+	l->px_ = r->px_;
+	weak_count_copy(&l->pn_, &r->pn_);
+}
+
 #endif /* ifndef __REF_COUNT_WEAK_REF_H_ */
