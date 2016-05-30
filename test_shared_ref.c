@@ -17,7 +17,7 @@ void test1()
 	if (d != NULL) {
 		printf("has been reset to NULL, must be NULL here\n");
 	}
-	shared_ref_release(&test1);
+	//shared_ref_release(&test1);
 
 	printf("=====test1 end=======\n");
 }

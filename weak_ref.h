@@ -17,11 +17,17 @@ static inline weak_ref *weak_ref_init(weak_ref *l, shared_ref *r)
 {
 	l->px_ = r->px_;
 	weak_count_init_from_shared(&l->pn_, &r->pn_);
+	return l;
 }
 
 static inline shared_ref *weak_ref_lock(shared_ref *l, weak_ref *r)
 {
 	return shared_ref_init_from_weak(l, r);
+}
+
+static inline void weak_ref_release(weak_ref *l)
+{
+	weak_count_release(&l->pn_);
 }
 
 #endif /* ifndef __REF_COUNT_WEAK_REF_H_ */
