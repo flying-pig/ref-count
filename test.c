@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 	pthread_attr_init(&attr);
 
 	num_threads = NUM_THREADS;
-	struct thread_info tinfo[NUM_THREADS] = {0};
+	struct thread_info tinfo[NUM_THREADS] = {{0, 0, NULL}};
 	for (tnum = 0; tnum < num_threads; tnum++) {
 		pthread_create(&tinfo[tnum].thread_id, &attr, test_process, b);
 	}
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 		}
 
 		printf("Joined with thread %ld; returned value was -",
-				tinfo[tnum].thread_id);
+				(long)tinfo[tnum].thread_id);
 	}
 
 	printf("use count: %ld\n", b->use_count(b));
