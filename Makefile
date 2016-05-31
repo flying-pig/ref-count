@@ -1,6 +1,10 @@
-CC = gcc
+ifeq ($(CC), gcc)
+	LDFLAGS = -pthread
+else
+	LDFLAGS =
+endif
+
 CFLAGS = -g -Wall -O -I. -Iref-count
-LDFLAGS = -pthread
 OBJS = test.o
 SHARED_OBJS = test_shared_ref.o shared_count.o
 WEAK_OBJS = test_weak_ref.o shared_count.o
