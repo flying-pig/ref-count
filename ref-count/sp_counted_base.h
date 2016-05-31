@@ -20,8 +20,7 @@
 # include <ref-count/sp_counted_base_pt.h>
 
 #elif defined( REF_COUNT_SP_HAS_CLANG_C11_ATOMICS )
-//# include <ref-count/sp_counted_base_clang.h>
-# include <ref-count/sp_counted_base_gcc_x86.h>
+# include <ref-count/sp_counted_base_clang.h>
 
 #elif defined( __GNUC__ ) && ( defined( __i386__ ) || defined( __x86_64__ ) ) && !defined(__PATHSCALE__)
 # include <ref-count/sp_counted_base_gcc_x86.h>
