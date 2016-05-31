@@ -41,6 +41,7 @@ static inline weak_ref *weak_ref_copy(weak_ref *l, weak_ref *r)
 {
 	l->px_ = r->px_;
 	weak_count_copy(&l->pn_, &r->pn_);
+	return l;
 }
 
 #endif /* ifndef __REF_COUNT_WEAK_REF_H_ */
