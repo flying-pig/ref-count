@@ -1,4 +1,6 @@
-ifeq ($(CC), gcc)
+GCC = $(shell cc --version | grep GCC | sed 's/^[^ ]* (\([^)]*\).*/\1/g')
+
+ifeq ($(GCC), GCC)
 	LDFLAGS = -pthread
 else
 	LDFLAGS =
