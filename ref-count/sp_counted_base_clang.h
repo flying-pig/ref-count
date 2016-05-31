@@ -90,7 +90,6 @@ struct sp_counted_base
 	release_func weak_release;
 
 	use_count_func use_count;
-	char impl[];
 };
 
 static inline void defult_free()
