@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -g -Wall -O -I. -Iref-count
 LDFLAGS = -pthread
-OBJS = test.o sp_counted_base_gcc_x86.o
-SHARED_OBJS = test_shared_ref.o shared_count.o sp_counted_base_gcc_x86.o
-WEAK_OBJS = test_weak_ref.o shared_count.o sp_counted_base_gcc_x86.o
+OBJS = test.o
+SHARED_OBJS = test_shared_ref.o shared_count.o
+WEAK_OBJS = test_weak_ref.o shared_count.o
 all: test test_shared_ref test_weak_ref
 
 test: $(OBJS)
