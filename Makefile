@@ -8,8 +8,8 @@ endif
 
 CFLAGS = -g -Wall -O -I. -Iref-count
 OBJS = test.o
-SHARED_OBJS = test_shared_ref.o shared_count.o
-WEAK_OBJS = test_weak_ref.o shared_count.o
+SHARED_OBJS = test_shared_ref.o
+WEAK_OBJS = test_weak_ref.o
 all: test test_shared_ref test_weak_ref
 
 test: $(OBJS)
