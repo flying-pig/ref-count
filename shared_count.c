@@ -61,7 +61,7 @@ void shared_count_release(shared_count *l)
 
 long shared_count_use_count(shared_count *l)
 {
-	return l->pi_->use_count(l->pi_);
+	return l->pi_ != NULL ? l->pi_->use_count(l->pi_) : 0;
 }
 
 /*
