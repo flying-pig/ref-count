@@ -73,6 +73,9 @@ void test3()
 	WEAK_REF_DEF(weak_b);
 	weak_ref_init(&weak_b, &test2);
 
+	WEAK_REF_DEF(weak_c);
+	weak_ref_init(&weak_c, &test2);
+
 	weak_ref_copy(&weak_a, &weak_b);
 	SHARED_REF_DEF(tmp);
 	char *d = (char *)shared_ref_get(weak_ref_lock(&tmp, &weak_a));
@@ -105,6 +108,7 @@ void test3()
 	shared_ref_release(&test2);
 	weak_ref_release(&weak_a);
 	weak_ref_release(&weak_b);
+	weak_ref_release(&weak_c);
 	printf("=====test3 end=======\n");
 }
 

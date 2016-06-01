@@ -45,8 +45,11 @@ void test3()
 	SHARED_REF_DEF(test2);
 	shared_ref_init(&test2, data2);
 	shared_ref_copy(&test2, &test1);
+	SHARED_REF_DEF(test3);
+	shared_ref_copy(&test3, &test1);
 	shared_ref_release(&test2);
 	shared_ref_release(&test1);
+	shared_ref_release(&test3);
 	printf("=====test3 end=======\n");
 }
 
