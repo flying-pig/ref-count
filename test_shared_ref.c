@@ -57,7 +57,7 @@ void test3()
 		printf("get null, should be error here\n");
 	}
 	long use_count = shared_ref_use_count(&test3);
-	printf("use count = %ld (count = 0 is OK, others is error)\n", use_count);
+	printf("use count = %ld (count = 1 is OK, others is error)\n", use_count);
 	shared_ref_release(&test3);
 	printf("=====test3 end=======\n");
 }
