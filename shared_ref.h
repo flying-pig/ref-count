@@ -78,4 +78,9 @@ static inline shared_ref *shared_ref_init_from_weak(shared_ref *l, weak_ref *r)
 	return l;
 }
 
+static inline long shared_ref_use_count(shared_ref *l)
+{
+	return shared_count_use_count(&l->pn_);
+}
+
 #endif /* ifndef __REF_COUNT_SHARED_REF_H_ */

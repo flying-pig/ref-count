@@ -59,6 +59,11 @@ void shared_count_release(shared_count *l)
 	if (l && l->pi_ != NULL) l->pi_->release(l->pi_);
 }
 
+long shared_count_use_count(shared_count *l)
+{
+	return l->pi_->use_count(l->pi_);
+}
+
 /*
  * weak_count
  */

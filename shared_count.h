@@ -23,6 +23,7 @@ shared_count *shared_count_init_from_weak(shared_count *l, weak_count *r);
 shared_count *shared_count_copy(shared_count *l, shared_count *r);
 void shared_count_swap(shared_count *l, shared_count *r);
 void shared_count_release(shared_count *l);
+long shared_count_use_count(shared_count *l);
 
 
 weak_count *weak_count_new();

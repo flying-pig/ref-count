@@ -49,6 +49,15 @@ void test3()
 	shared_ref_copy(&test3, &test1);
 	shared_ref_release(&test2);
 	shared_ref_release(&test1);
+
+	char *d = (char *)shared_ref_get(&test3);
+	if (d == data) {
+		printf("get data ok?\n");
+	} else {
+		printf("get null, should be error here\n");
+	}
+	long use_count = shared_ref_use_count(&test3);
+	printf("use count = %ld (count = 0 is OK, others is error)\n", use_count);
 	shared_ref_release(&test3);
 	printf("=====test3 end=======\n");
 }
