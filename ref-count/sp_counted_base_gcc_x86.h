@@ -171,7 +171,7 @@ static inline sp_counted_base *sp_counted_new(SP_COUNT_TYPE type)
 	(void) type;
 	sp_counted_base *base = (sp_counted_base *)malloc(sizeof(sp_counted_base));
 	base->use_count_ = 1;
-   	base->weak_count_ = 1;
+	base->weak_count_ = 1;
 
 	base->free_ = defult_free;
 	base->destroy = destroy;
